@@ -37,12 +37,11 @@ public class MaximoMatriz extends Thread{
 			for (int j = 0; j < DIM; j++) {
 				matriz[i][j] = ThreadLocalRandom.current().nextInt(0, INT_MAX);				
 			}
-
-			System.out.println("Matriz:");
-			System.out.println("====================================");
-			imprimirMatriz();
-
 		}
+		//Imprimir la matriz
+		System.out.println("Matriz:");
+		System.out.println("====================================");
+		imprimirMatriz();
 	}
 
 	//Imprimir la matriz en consola
@@ -74,7 +73,7 @@ public class MaximoMatriz extends Thread{
 
 			mayor = this.mayorFila;
 
-			String warn = String.format("============ Nuevo máximo Global encontrado ============ \n" + 
+			String warn = String.format("============ Nuevo máximo encontrado ============ \n" + 
 							"ID Thread: %d - Máximo Local Actual: %d - Máximo Global %d \n" + "\n"
 							, this.idThread, mayor, this.mayorFila);
 
@@ -100,36 +99,10 @@ public class MaximoMatriz extends Thread{
 
 		//Iniciar la búsqueda
 		MaximoMatriz[] bThreads = new MaximoMatriz[DIM];
-//		for (int i = 0; i < bThreads.length; i++) {
-//			bThreads[i] = new MaximoMatriz(i,i);
-//			bThreads[i].start();			
-//		}
-		
-		bThreads[0] = new MaximoMatriz(0,0);
-		bThreads[0].start();
-		try {
-			bThreads[0].sleep(1000);
-		} catch (InterruptedException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+		for (int i = 0; i < bThreads.length; i++) {
+			bThreads[i] = new MaximoMatriz(i,i);
+			bThreads[i].start();			
 		}
-		
-		bThreads[1] = new MaximoMatriz(1,1);
-		bThreads[1].start();
-		try {
-			bThreads[1].sleep(1000);
-		} catch (InterruptedException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		
-		bThreads[2] = new MaximoMatriz(2,2);
-		bThreads[2].start();
-		try {
-			bThreads[2].sleep(1000);
-		} catch (InterruptedException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+
 	}
 }
